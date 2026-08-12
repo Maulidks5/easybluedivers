@@ -24,6 +24,7 @@ class DashboardController extends Controller
     {
         $filters = $request->validate([
             'status' => ['nullable', 'in:new,contacted,confirmed,cancelled,completed'],
+            'stage' => ['nullable', 'in:new,deposit,confirmed,history,all'],
             'date' => ['nullable', 'date'],
             'search' => ['nullable', 'string', 'max:100'],
         ]);
@@ -33,6 +34,10 @@ class DashboardController extends Controller
         // replace that string with an object in Inertia's JSON response.
         $bookings = Booking::with(['slot:id,date,start_time,guest_note'])
             ->when($filters['status'] ?? null, fn ($query, $status) => $query->where('status', $status))
+            ->when(($filters['stage'] ?? null) === 'new', fn ($query) => $query->whereIn('status', ['new', 'contacted']))
+            ->when(($filters['stage'] ?? null) === 'deposit', fn ($query) => $query->whereIn('payment_status', ['pending', 'partially_paid']))
+            ->when(($filters['stage'] ?? null) === 'confirmed', fn ($query) => $query->where('status', 'confirmed'))
+            ->when(($filters['stage'] ?? null) === 'history', fn ($query) => $query->whereIn('status', ['completed', 'cancelled']))
             ->when($filters['date'] ?? null, fn ($query, $date) => $query->whereDate('preferred_date', $date))
             ->when($filters['search'] ?? null, function ($query, $search) {
                 $term = '%' . trim($search) . '%';
@@ -49,6 +54,7 @@ class DashboardController extends Controller
             'bookings' => $bookings,
             'filters' => [
                 'status' => $filters['status'] ?? '',
+                'stage' => $filters['stage'] ?? 'new',
                 'date' => $filters['date'] ?? '',
                 'search' => $filters['search'] ?? '',
             ],
