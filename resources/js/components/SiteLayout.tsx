@@ -10,7 +10,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <Seo />
       <Header />
       <main className="flex-1 pb-24 sm:pb-0">{children}</main>
-      <Footer />
+      <div className="pb-24 sm:pb-0">
+        <Footer />
+      </div>
       <MobileActionBar />
     </div>
   );
