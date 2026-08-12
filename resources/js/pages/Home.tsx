@@ -41,6 +41,7 @@ export default function Home() {
       <HeroSection
         backgroundImage={homeHero?.data?.image_path ? `/storage/${homeHero.data.image_path}` : undefined}
         backgroundVideo={homeHero?.data?.media_type === "video" && homeHero.data.video_path ? `/storage/${homeHero.data.video_path}` : undefined}
+        mobileFocus="62% 50%"
         eyebrow="Zanzibar • Indian Ocean"
         title={homeHero?.title || "Discover Zanzibar Beneath the Surface"}
         subtitle={homeHero?.subtitle || "Safe, professional and unforgettable diving experiences for beginners and certified divers."}

@@ -110,11 +110,11 @@ export function Footer() {
 
       <div className="border-t border-navy-foreground/15">
         <div className="container-page flex flex-col gap-3 py-5 text-xs text-navy-foreground/65 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Easy Blue Divers Zanzibar. All Rights Reserved. <a href="https://www.myt.co.tz" target="_blank" rel="noopener noreferrer" className="font-semibold text-navy-foreground/85 transition-colors hover:text-turquoise">Developed by MwambaovYouth Technology</a></p>
+          <p>© 2026 Easy Blue Divers Zanzibar. All Rights Reserved. <a href="https://www.myt.co.tz" target="_blank" rel="noopener noreferrer" className="font-semibold text-navy-foreground/85 transition-colors hover:text-turquoise">Developed by Mwambao Youth Technology</a></p>
           <div className="flex flex-wrap items-center gap-2 sm:justify-end sm:gap-x-4 sm:gap-y-2">
             <Link href="/booking-terms" className="px-1 py-2 hover:text-navy-foreground sm:p-0">Booking Terms</Link>
             <Link href="/privacy" className="px-1 py-2 hover:text-navy-foreground sm:p-0">Privacy</Link>
-            <a href={adminHref} aria-label={`Open ${adminLabel}`} className="inline-flex min-h-9 items-center gap-2 rounded-full border border-turquoise/45 bg-turquoise/10 px-3 py-2 font-semibold text-turquoise transition-colors hover:bg-turquoise hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-turquoise sm:min-h-0 sm:border-0 sm:bg-transparent sm:px-1 sm:py-0 sm:text-navy-foreground/75 sm:hover:bg-transparent sm:hover:text-turquoise"><LockKeyhole className="size-3.5" aria-hidden="true" />{adminLabel}</a>
+            <a href={adminHref} aria-label={`Open ${adminLabel}`} title={adminLabel} className="inline-flex size-9 items-center justify-center rounded-full border border-turquoise/45 bg-turquoise/10 text-turquoise transition-colors hover:bg-turquoise hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-turquoise sm:border-0 sm:bg-transparent sm:text-navy-foreground/75 sm:hover:bg-transparent sm:hover:text-turquoise"><LockKeyhole className="size-3.5" aria-hidden="true" /></a>
           </div>
         </div>
       </div>

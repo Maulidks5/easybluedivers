@@ -133,7 +133,7 @@ class DashboardController extends Controller
             'payment_notes' => ['nullable', 'string', 'max:2000'],
         ]);
 
-        $sendConfirmation = DB::transaction(function () use ($booking, $data) {
+        [$sendConfirmation, $sendDepositRequest] = DB::transaction(function () use ($booking, $data) {
             $booking = Booking::lockForUpdate()->findOrFail($booking->id);
             $slot = $booking->experience_slot_id ? ExperienceSlot::lockForUpdate()->find($booking->experience_slot_id) : null;
 
@@ -145,6 +145,8 @@ class DashboardController extends Controller
             }
 
             $booking->update($data);
+            $statusChangedToConfirmed = $data['status'] === 'confirmed' && $booking->wasChanged('status');
+            $paymentChangedToPending = $data['payment_status'] === 'pending' && $booking->wasChanged('payment_status');
             if (in_array($data['payment_status'], ['paid', 'partially_paid'], true) && ! $booking->paid_at) {
                 $booking->update(['paid_at' => now()]);
             }
@@ -154,11 +156,18 @@ class DashboardController extends Controller
             if ($slot) {
                 SlotAvailability::sync($slot);
             }
-            return $data['status'] === 'confirmed' && $booking->wasChanged('status');
+            return [
+                $statusChangedToConfirmed,
+                $paymentChangedToPending,
+            ];
         });
 
         if ($sendConfirmation) {
             BookingMailer::notifyGuestConfirmation($booking->fresh(['experience', 'slot']));
+        }
+
+        if ($sendDepositRequest) {
+            BookingMailer::notifyGuestDepositRequest($booking->fresh(['experience', 'slot']), SiteSetting::first());
         }
 
         return back();

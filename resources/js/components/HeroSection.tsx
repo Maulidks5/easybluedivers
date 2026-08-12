@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import divingHero from "@/assets/diving-hero.jpg";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +11,8 @@ type HeroSectionProps = {
   /** Shorter hero for inner pages. */
   compact?: boolean;
   focus?: string;
+  /** A separate focal point for portrait screens, where the image is cropped more tightly. */
+  mobileFocus?: string;
   backgroundImage?: string;
   backgroundVideo?: string;
 };
@@ -23,6 +25,7 @@ export function HeroSection({
   trustLine,
   compact = false,
   focus = "50% 45%",
+  mobileFocus,
   backgroundImage,
   backgroundVideo,
 }: HeroSectionProps) {
@@ -30,10 +33,10 @@ export function HeroSection({
     <section
       className={cn(
         "relative isolate flex items-center overflow-hidden",
-        compact ? "min-h-[min(460px,64svh)] pt-24 pb-12 sm:min-h-[min(500px,66svh)] sm:pt-28 sm:pb-14" : "min-h-[min(760px,100svh)] pt-28 pb-16 sm:pt-32 sm:pb-20",
+        compact ? "min-h-[min(460px,64svh)] pt-24 pb-12 sm:min-h-[min(500px,66svh)] sm:pt-28 sm:pb-14" : "min-h-[min(680px,88svh)] pt-28 pb-16 sm:min-h-[min(760px,100svh)] sm:pt-32 sm:pb-20",
       )}
     >
-      {backgroundVideo ? <video autoPlay muted loop playsInline poster={backgroundImage || divingHero} className="absolute inset-0 -z-20 size-full object-cover" style={{ objectPosition: focus }} aria-hidden="true"><source src={backgroundVideo} /></video> : <img src={backgroundImage || divingHero} alt="Scuba diver exploring a colourful coral reef in the clear blue ocean water of Zanzibar" width={1920} height={1088} className="hero-cinematic-zoom absolute inset-0 -z-20 size-full object-cover" style={{ objectPosition: focus }} />}
+      {backgroundVideo ? <video autoPlay muted loop playsInline poster={backgroundImage || divingHero} className="hero-cinematic-zoom absolute inset-0 -z-20 size-full object-cover" style={{ "--hero-focus": focus, "--hero-mobile-focus": mobileFocus || focus } as CSSProperties} aria-hidden="true"><source src={backgroundVideo} /></video> : <img src={backgroundImage || divingHero} alt="Scuba diver exploring a colourful coral reef in the clear blue ocean water of Zanzibar" width={1920} height={1088} className="hero-cinematic-zoom absolute inset-0 -z-20 size-full object-cover" style={{ "--hero-focus": focus, "--hero-mobile-focus": mobileFocus || focus } as CSSProperties} />}
       <div
         className={cn(
           "absolute inset-0 -z-10 bg-gradient-to-br",

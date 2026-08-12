@@ -49,6 +49,7 @@ class BookingController extends Controller
         });
 
         BookingMailer::notifyAdmin($booking);
+        BookingMailer::notifyGuestBookingReceived($booking);
 
         return back()->with('success', 'Thank you. We will contact you to confirm availability.');
     }

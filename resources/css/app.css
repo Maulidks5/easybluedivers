@@ -172,17 +172,37 @@
 /* A slow, single-image hero movement: cinematic without the distraction of a slider. */
 @keyframes hero-cinematic-zoom {
   from {
-    transform: scale(1.01);
+    transform: scale(1.015);
   }
 
   to {
-    transform: scale(1.1);
+    transform: scale(1.075);
   }
 }
 
 .hero-cinematic-zoom {
-  animation: hero-cinematic-zoom 18s ease-out both;
+  animation: hero-cinematic-zoom 16s ease-out both;
+  object-position: var(--hero-focus, 50% 45%);
   will-change: transform;
+}
+
+/* Portrait screens need a slightly different crop. It keeps the photo immersive
+   while leaving enough space for the hero message. */
+@media (max-width: 639px) {
+  @keyframes hero-mobile-cinematic-zoom {
+    from {
+      transform: scale(1.035);
+    }
+
+    to {
+      transform: scale(1.095);
+    }
+  }
+
+  .hero-cinematic-zoom {
+    animation: hero-mobile-cinematic-zoom 14s ease-out both;
+    object-position: var(--hero-mobile-focus, 55% 50%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
