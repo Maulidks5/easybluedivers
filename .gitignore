@@ -24,6 +24,7 @@
 /deployment/vendor-production.zip
 /deployment/public-html.zip
 /deployment/.build
+/.vendor-production-build
 _ide_helper.php
 Homestead.json
 Homestead.yaml
