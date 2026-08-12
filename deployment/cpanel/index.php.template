@@ -21,4 +21,7 @@ require $applicationPath.'/vendor/autoload.php';
 /** @var Application $app */
 $app = require_once $applicationPath.'/bootstrap/app.php';
 
+// The real web root is cPanel's public_html, outside the Laravel application.
+$app->usePublicPath(__DIR__);
+
 $app->handleRequest(Request::capture());
