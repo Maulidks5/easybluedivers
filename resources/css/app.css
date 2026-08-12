@@ -1,0 +1,192 @@
+@import "tailwindcss" source(none);
+@source "../js";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Easy Blue Divers Zanzibar — ocean design system.
+ * All colours are semantic tokens; never hardcode colours in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-ocean: var(--ocean);
+  --color-turquoise: var(--turquoise);
+  --color-coral: var(--coral);
+  --color-coral-foreground: var(--coral-foreground);
+  --color-surface: var(--surface);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Base */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.24 0.06 250);
+  --surface: oklch(0.973 0.008 235);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.06 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.06 250);
+
+  /* Ocean blue as the primary brand colour */
+  --primary: oklch(0.52 0.14 240);
+  --primary-foreground: oklch(0.99 0.005 230);
+
+  --secondary: oklch(0.955 0.015 225);
+  --secondary-foreground: oklch(0.28 0.07 250);
+
+  --muted: oklch(0.965 0.008 235);
+  --muted-foreground: oklch(0.52 0.03 245);
+
+  --accent: oklch(0.82 0.11 195);
+  --accent-foreground: oklch(0.22 0.06 250);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0.005 230);
+
+  --border: oklch(0.9 0.015 235);
+  --input: oklch(0.9 0.015 235);
+  --ring: oklch(0.62 0.13 220);
+
+  /* Brand extras */
+  --navy: oklch(0.24 0.075 255);
+  --navy-foreground: oklch(0.98 0.008 230);
+  --ocean: oklch(0.52 0.14 240);
+  --turquoise: oklch(0.78 0.13 192);
+  --coral: oklch(0.68 0.18 40);
+  --coral-foreground: oklch(0.99 0.005 60);
+}
+
+.dark {
+  --background: oklch(0.19 0.06 256);
+  --foreground: oklch(0.97 0.008 230);
+  --surface: oklch(0.24 0.06 255);
+  --card: oklch(0.24 0.06 255);
+  --card-foreground: oklch(0.97 0.008 230);
+  --popover: oklch(0.24 0.06 255);
+  --popover-foreground: oklch(0.97 0.008 230);
+  --primary: oklch(0.66 0.14 230);
+  --primary-foreground: oklch(0.16 0.05 255);
+  --secondary: oklch(0.3 0.05 252);
+  --secondary-foreground: oklch(0.97 0.008 230);
+  --muted: oklch(0.3 0.05 252);
+  --muted-foreground: oklch(0.75 0.03 235);
+  --accent: oklch(0.6 0.1 195);
+  --accent-foreground: oklch(0.97 0.008 230);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.66 0.12 220);
+  --navy: oklch(0.16 0.05 255);
+  --navy-foreground: oklch(0.97 0.008 230);
+}
+
+/* The management area always uses the clear light interface, even if a browser
+   extension or an inherited class requests dark mode on the public website. */
+.admin-light {
+  color-scheme: light;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.24 0.06 250);
+  --surface: oklch(0.973 0.008 235);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.06 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.06 250);
+  --primary: oklch(0.52 0.14 240);
+  --primary-foreground: oklch(0.99 0.005 230);
+  --secondary: oklch(0.955 0.015 225);
+  --secondary-foreground: oklch(0.28 0.07 250);
+  --muted: oklch(0.965 0.008 235);
+  --muted-foreground: oklch(0.52 0.03 245);
+  --accent: oklch(0.82 0.11 195);
+  --accent-foreground: oklch(0.22 0.06 250);
+  --border: oklch(0.9 0.015 235);
+  --input: oklch(0.9 0.015 235);
+  --ring: oklch(0.62 0.13 220);
+  --navy: oklch(0.24 0.075 255);
+  --navy-foreground: oklch(0.98 0.008 230);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+/* A slow, single-image hero movement: cinematic without the distraction of a slider. */
+@keyframes hero-cinematic-zoom {
+  from {
+    transform: scale(1.01);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.hero-cinematic-zoom {
+  animation: hero-cinematic-zoom 18s ease-out both;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic-zoom {
+    animation: none;
+  }
+}

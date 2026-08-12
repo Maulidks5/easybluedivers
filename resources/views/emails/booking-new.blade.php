@@ -1,0 +1,2 @@
+<h1>New booking request</h1>
+<p><strong>Guest:</strong> {{ $booking->full_name }}</p><p><strong>WhatsApp:</strong> {{ $booking->whatsapp_number }}</p><p><strong>Email:</strong> {{ $booking->guest_email ?: 'Not provided' }}</p><p><strong>Experience:</strong> {{ $booking->experience }}</p><p><strong>Preferred date:</strong> {{ $booking->preferred_date?->format('D, j M Y') }}</p><p><strong>Guests:</strong> {{ $booking->guests }}</p><p>Open the Easy Blue admin booking inbox to follow up and confirm availability.</p>

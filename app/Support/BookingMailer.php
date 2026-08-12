@@ -1,0 +1,4 @@
+<?php
+namespace App\Support;
+use App\Mail\BookingConfirmed; use App\Mail\NewBookingNotification; use App\Models\Booking; use Illuminate\Support\Facades\Log; use Illuminate\Support\Facades\Mail;
+class BookingMailer { public static function notifyAdmin(Booking $booking): void { $recipient=config('mail.admin_address'); if (!$recipient) return; try { Mail::to($recipient)->send(new NewBookingNotification($booking)); } catch (\Throwable $exception) { Log::warning('New booking email could not be sent.', ['booking_id'=>$booking->id,'error'=>$exception->getMessage()]); } } public static function notifyGuestConfirmation(Booking $booking): void { if (!$booking->guest_email) return; try { Mail::to($booking->guest_email)->send(new BookingConfirmed($booking)); } catch (\Throwable $exception) { Log::warning('Booking confirmation email could not be sent.', ['booking_id'=>$booking->id,'error'=>$exception->getMessage()]); } } }

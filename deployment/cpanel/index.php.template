@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+
+define('LARAVEL_START', microtime(true));
+
+$applicationPath = '__LARAVEL_APP_PATH__';
+
+if (! is_file($applicationPath.'/vendor/autoload.php')) {
+    http_response_code(500);
+    exit('Easy Blue deployment is incomplete: vendor files are missing.');
+}
+
+if (file_exists($maintenance = $applicationPath.'/storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+require $applicationPath.'/vendor/autoload.php';
+
+/** @var Application $app */
+$app = require_once $applicationPath.'/bootstrap/app.php';
+
+$app->handleRequest(Request::capture());
