@@ -18,17 +18,16 @@ This creates two ignored, upload-only files:
 
 1. Clone the Git repository outside `public_html`, for example `/home/CPANEL_USERNAME/easy-blue-divers-website`.
 2. Copy `.env.production.example` to `.env` in that application folder. Enter the manually created MySQL details and real SMTP mailbox password. Leave `APP_KEY` blank: the deployment script generates it once, if needed.
-3. Set `PUBLIC_UPLOADS_PATH` to `/home/CPANEL_USERNAME/public_html/uploads`.
-4. Import the database through phpMyAdmin, then run migrations only if the imported database does not already contain the latest migrations.
-5. Upload `vendor-production.zip` and `public-html.zip` into the application `deployment/` folder using cPanel File Manager.
-6. Run:
+3. Import the database through phpMyAdmin, then run migrations only if the imported database does not already contain the latest migrations.
+4. Upload `vendor-production.zip` and `public-html.zip` into the application `deployment/` folder using cPanel File Manager.
+5. Run:
 
 ```bash
 chmod +x deployment/cpanel-deploy.sh
 ./deployment/cpanel-deploy.sh
 ```
 
-The script copies public files to `public_html`, unpacks vendor outside the web root, points `public_html/index.php` at the application, generates a missing app key, and optimises Laravel. It never runs Composer or Node.js.
+The script copies public files to `public_html`, unpacks vendor outside the web root, points `public_html/index.php` at the application, sets `PUBLIC_UPLOADS_PATH` to the real cPanel uploads directory, generates a missing app key, and optimises Laravel. It never runs Composer or Node.js.
 
 ## Uploads
 

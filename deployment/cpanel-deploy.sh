@@ -16,6 +16,15 @@ test -f "$APP_PATH/.env" || { echo "Create the production .env file before runni
 
 mkdir -p "$PUBLIC_PATH" "$PUBLIC_PATH/uploads"
 
+# Keep Laravel's public disk pointed at the actual cPanel uploads directory.
+# The production env template intentionally contains a placeholder, which must
+# never reach Flysystem because it would try to create /home/CPANEL_USERNAME.
+if grep -q '^PUBLIC_UPLOADS_PATH=' "$APP_PATH/.env"; then
+  sed -i "s|^PUBLIC_UPLOADS_PATH=.*$|PUBLIC_UPLOADS_PATH=$PUBLIC_PATH/uploads|" "$APP_PATH/.env"
+else
+  echo "PUBLIC_UPLOADS_PATH=$PUBLIC_PATH/uploads" >> "$APP_PATH/.env"
+fi
+
 echo "Installing prebuilt public files…"
 unzip -oq "$APP_PATH/deployment/public-html.zip" -d "$PUBLIC_PATH"
 

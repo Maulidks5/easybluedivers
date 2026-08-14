@@ -1,6 +1,6 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { BookOpen, CalendarDays, ChevronDown, ExternalLink, FileText, FolderTree, Handshake, HelpCircle, Images, LayoutDashboard, LogOut, MapPinned, Menu, MessageSquare, Settings, Tag, Users, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const navigationGroups = [
@@ -14,7 +14,27 @@ export function AdminLayout({ title, children }: { title: string; children: Reac
   const { url, props } = usePage<{ auth?: { user?: { name?: string; email?: string; role?: string } } }>();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<string[]>(["Overview"]);
+  const idleTimer = useRef<number | undefined>(undefined);
   const user = props.auth?.user;
+
+  useEffect(() => {
+    const timeout = 30 * 60 * 1000;
+    const signOutForInactivity = () => {
+      router.post("/admin/logout", {}, { onFinish: () => window.location.assign("/admin/login?expired=1") });
+    };
+    const resetTimer = () => {
+      if (idleTimer.current) window.clearTimeout(idleTimer.current);
+      idleTimer.current = window.setTimeout(signOutForInactivity, timeout);
+    };
+    const events = ["pointerdown", "keydown", "scroll", "touchstart"] as const;
+    events.forEach((event) => window.addEventListener(event, resetTimer, { passive: true }));
+    resetTimer();
+
+    return () => {
+      if (idleTimer.current) window.clearTimeout(idleTimer.current);
+      events.forEach((event) => window.removeEventListener(event, resetTimer));
+    };
+  }, []);
 
   return (
     <div className="admin-light min-h-screen bg-surface lg:flex">

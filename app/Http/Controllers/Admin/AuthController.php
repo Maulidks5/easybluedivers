@@ -25,6 +25,7 @@ class AuthController extends Controller
         }
         RateLimiter::clear($throttleKey);
         $request->session()->regenerate();
+        $request->session()->put('admin_last_activity', now()->timestamp);
         return redirect()->intended('/admin');
     }
     public function destroy(Request $request) { Auth::logout(); $request->session()->invalidate(); $request->session()->regenerateToken(); return redirect('/admin/login'); }
