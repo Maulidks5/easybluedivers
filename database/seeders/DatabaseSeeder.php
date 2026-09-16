@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(['email' => 'maulid4salum@gmail.com'], ['name' => 'Easy Blue Admin', 'role' => 'admin', 'password' => Hash::make('Admin001')]);
-        SiteSetting::updateOrCreate(['id' => 1], ['whatsapp' => '+255 777 422 488', 'email' => 'info@easybluedivers.com', 'location' => 'Jambiani, Zanzibar, Tanzania', 'payment_currency' => 'TZS']);
+        SiteSetting::updateOrCreate(['id' => 1], ['whatsapp' => '+255 622 022 488', 'email' => 'info@easybluedivers.com', 'location' => 'Jambiani, Zanzibar, Tanzania', 'payment_currency' => 'TZS']);
         foreach ([
             ['key' => 'home_hero', 'title' => 'Your Zanzibar Dive Starts Here', 'subtitle' => 'Easy, well-planned scuba experiences for first-time divers, certified divers and private groups.', 'body' => 'Clear guidance • Small-group attention • Easy WhatsApp planning', 'data' => ['image_path' => 'gallery/easy-blue/divers-at-sea.jpeg']],
             ['key' => 'about_story', 'title' => 'Diving Made Personal in Zanzibar', 'subtitle' => 'Easy Blue Divers brings together local reef knowledge, calm guidance and a warm island welcome.', 'body' => 'We believe the best dive experience begins before you enter the water. That is why we take time to understand your plans, explain each step clearly and recommend an experience that matches your confidence and time in Zanzibar. From a first underwater breath to a relaxed guided reef dive, our focus is simple: help you feel prepared, supported and excited for the day ahead.', 'data' => ['image_path' => 'gallery/easy-blue/easy-blue-zanzibar.jpeg']],

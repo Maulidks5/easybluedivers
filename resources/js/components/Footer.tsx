@@ -1,10 +1,12 @@
 import { Link, usePage } from "@inertiajs/react";
-import { Camera, Clock3, LockKeyhole, Mail, MapPin, MessageCircle, Music2, Share2, Video } from "lucide-react";
-import { CONTACT_EMAIL, WHATSAPP_LINK, navLinks } from "@/data/site";
+import { Camera, Clock3, LockKeyhole, Mail, MapPin, MessageCircle, Music2, Phone, Share2, Video } from "lucide-react";
+import { CONTACT_EMAIL, CONTACT_PHONE, PHONE_LINK, WHATSAPP_LINK, navLinks } from "@/data/site";
 
 export function Footer() {
   const { siteSettings, auth } = usePage<{ siteSettings?: { whatsapp?: string; email?: string; location?: string; google_maps_url?: string; business_hours?: string; instagram_url?: string; facebook_url?: string; tiktok_url?: string; youtube_url?: string }; auth?: { user?: { id: number; name: string; email: string } | null } }>().props;
   const whatsapp = siteSettings?.whatsapp ? `https://wa.me/${siteSettings.whatsapp.replace(/\D/g, '')}` : WHATSAPP_LINK;
+  const phone = siteSettings?.whatsapp || CONTACT_PHONE;
+  const phoneLink = siteSettings?.whatsapp ? `tel:+${siteSettings.whatsapp.replace(/\D/g, '')}` : PHONE_LINK;
   const email = siteSettings?.email || CONTACT_EMAIL;
   const location = siteSettings?.location || "Jambiani, Zanzibar, Tanzania";
   const isAdminSignedIn = Boolean(auth?.user);
@@ -89,7 +91,16 @@ export function Footer() {
                 className="inline-flex items-center gap-2 transition-colors hover:text-navy-foreground"
               >
                 <MessageCircle className="size-4" aria-hidden="true" />
-                WhatsApp: {siteSettings?.whatsapp || "+255 777 422 488"}
+                WhatsApp: {phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={phoneLink}
+                className="inline-flex items-center gap-2 transition-colors hover:text-navy-foreground"
+              >
+                <Phone className="size-4" aria-hidden="true" />
+                Call: {phone}
               </a>
             </li>
             <li>

@@ -4,7 +4,9 @@
  * by props coming from a Laravel controller through Inertia.
  */
 
-export const WHATSAPP_LINK = "https://wa.me/255777422488";
+export const CONTACT_PHONE = "+255 622 022 488";
+export const PHONE_LINK = "tel:+255622022488";
+export const WHATSAPP_LINK = "https://wa.me/255622022488";
 export const CONTACT_EMAIL = "info@easybluedivers.com";
 export const MAPS_LINK = "https://www.google.com/maps/search/?api=1&query=Easy+Blue+Divers%2C+Jambiani%2C+Zanzibar";
 export const REVIEWS_LINK = "https://www.tripadvisor.com/Attraction_Review-g635745-d24972935-Reviews-Easy_Blue_Divers-Jambiani_Zanzibar_Island_Zanzibar_Archipelago.html";
